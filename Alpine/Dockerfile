@@ -1,4 +1,6 @@
 FROM alpine:latest
+
+# Update&Install
 RUN apk update \
     && apk add --no-cache openssh \
     && ssh-keygen -A \
@@ -12,5 +14,7 @@ RUN apk update \
     && echo "ClientAliveInterval 60" >> /etc/ssh/sshd_config \
     && echo "ClientAliveCountMax 3" >> /etc/ssh/sshd_config \
     && mkdir /run/sshd
+    
+# StartSSH
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]

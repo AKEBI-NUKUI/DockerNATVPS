@@ -1,5 +1,4 @@
 #!/bin/sh
-# 位置参数
 
 ssh_port=$1
 tran_port_start=$2

@@ -15,12 +15,12 @@ read -e -p "分配内存值: " ram
 sed "s/{{ROOT_PASSWORD}}/$GEN_PASS/" Dockerfile > Dockerfile.tmp
 
 # 构建 Docker 镜像
-docker build -t debian-$ssh_port -f Dockerfile.tmp .
+docker build -t debian$ssh_port -f Dockerfile.tmp .
 
 # 启动 Docker 容器
-docker run --name debian-$ssh_port -p $ssh_port:22 -p $tran_port_start-$tran_port_end:$tran_port_start-$tran_port_end -d --restart always --cpus 0.$cpu --memory "$ram"m debian-$ssh_port
+docker run --name debian$ssh_port -p $ssh_port:22 -p $tran_port_start-$tran_port_end:$tran_port_start-$tran_port_end -d --restart always --cpus 0.$cpu --memory "$ram"m debian$ssh_port
 
 # 删除临时文件
 rm -f Dockerfile.tmp
 
-echo "SSH端口: $ssh_port 密码: $GEN_PASS 端口: $tran_port_start - $tran_port_end" >> output.log
+echo "SSH端口: $ssh_port 密码: $GEN_PASS 端口: $tran_port_start - $tran_port_end OS:Debian" >> output.log

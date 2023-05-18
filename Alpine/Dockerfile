@@ -2,6 +2,8 @@ FROM alpine:latest
 RUN apk update \
     && apk add --no-cache openssh \
     && ssh-keygen -A \
+    && echo 'kill 1' >> /usr/bin/reboot \
+    && chmod +x /usr/bin/reboot \
     && echo 'root:{{ROOT_PASSWORD}}' | chpasswd \
     && sed -i 's/^#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config \
     && sed -i 's/^PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config \
